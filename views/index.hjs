@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <!--<p>Welcome</p>-->
+	<form action = "http://127.0.0.1:8080/login" method = "POST">
+		User Name: <input type = "text" name = "User Name"> <br>
+		Password: <input type = "text" name = "Password">
+		<input type = "submit" value = "Login"> 
+  </body>
+</html>
