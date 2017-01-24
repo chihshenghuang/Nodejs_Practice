@@ -6,8 +6,9 @@ var router = express.Router();
 router.get('/logout', function(req, res, next){
 	//Delete cookie
 	console.log('logout');
-	res.clear('user');
-	res.redirect('index');
+	res.clearCookie('user');
+	//res.redirect('index');
+	res.render('index');
 });
 
 module.exports = router;

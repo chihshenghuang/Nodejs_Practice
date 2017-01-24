@@ -3,14 +3,14 @@ var router = express.Router();
 
 /* GET home page. */
 router.post('/login', function(req, res, next){
-	var username = req.cookies.username;
-	var pwd = req.cookies.pwd;
+	var username = req.body.username;
+	var pwd = req.body.pwd;
 	var user = {username: 'admin', pwd:123456};
 	console.log(username + ',' + pwd);
 		
 	if(username == user.username && pwd == user.pwd){
 		//Set cookie
-		res.cookie("user", {username: username}, {maxAge:60000, httpOnly			:false});
+		res.cookie("user", username, {maxAge:60000, httpOnly			:false});
 		res.redirect('index');
 	}else{
 		console.log("Error user");
@@ -25,5 +25,11 @@ router.get('/logout', function(req, res, next){
 	res.clear('user');
 	res.redirect('index');
 });
+
+router.get('/viewdata', function(req, res, next){
+	console.log("View user's data");
+	res.send(req.cookies.user);
+});
+
 
 module.exports = router;

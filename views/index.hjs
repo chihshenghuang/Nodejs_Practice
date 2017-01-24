@@ -11,5 +11,18 @@
 		<input type = "submit", value = "Login">
 
 	</form>
+  </body> 
+  <script>
+	function checkCookie(){
+		var user = document.cookie;
+		if(user != ""){
+			alert("Welcome again " + user);
+		}else{
+			user = alert("Welcome");
+		}
+	}
+  </script>
+  <body onload = "checkCookie()">
   </body>
+	
 </html>
