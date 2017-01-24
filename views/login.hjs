@@ -5,6 +5,9 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <p>Success</p>
+  	<p> Success </p>
+	<form action = "http://127.0.0.1:8080/logout" mehtod = "get">
+		<input type = "submit" value = "Logout">
+	</form>
   </body>
 </html>
