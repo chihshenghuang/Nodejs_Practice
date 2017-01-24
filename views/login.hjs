@@ -5,7 +5,10 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-  	<p> Success</p> <a href = "/viewdata">View user data</a>
+  	<p> Success</p><!--<a href = "/viewdata">View user data</a>-->
+	<form action = "http://127.0.0.1:8080/viewdata" method = "get">
+		<input type = "submit" value = "View Data">
+	</form>
 	<form action = "http://127.0.0.1:8080/logout" mehtod = "get">
 		<input type = "submit" value = "Logout">
 	</form>

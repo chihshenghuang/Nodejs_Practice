@@ -28,6 +28,7 @@ router.get('/logout', function(req, res, next){
 
 router.get('/viewdata', function(req, res, next){
 	console.log("View user's data");
+	console.log(req.cookies.user);
 	res.send(req.cookies.user);
 });
 

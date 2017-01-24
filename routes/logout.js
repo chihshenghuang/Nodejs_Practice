@@ -7,7 +7,6 @@ router.get('/logout', function(req, res, next){
 	//Delete cookie
 	console.log('logout');
 	res.clearCookie('user');
-	//res.redirect('index');
 	res.render('index');
 });
 
