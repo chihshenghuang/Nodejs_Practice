@@ -4,6 +4,7 @@
     <title>{{ title }}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
+  <h1>{{title}}</h1>
   <body>
 	<form action = "http://127.0.0.1:8080/login" method = "POST">
 		User Name: <input tpye = "text" name = "username" > <br>
@@ -18,10 +19,15 @@
   <script>
 	function checkCookie(){
 		var user = document.cookie;
-		if(user != ""){
-			alert("Welcome again " + user);
+		var isLoginError = "{{isLoginError}}";
+		if(!isLoginError){
+			if(user != ""){
+				alert("Welcome again " + user);
+			}else{
+				user = alert("Welcome");
+			}
 		}else{
-			user = alert("Welcome");
+			alert("Wrong username or password");
 		}
 	}
   </script>
