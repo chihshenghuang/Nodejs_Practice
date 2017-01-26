@@ -9,7 +9,7 @@
 	<form action = "http://127.0.0.1:8080/users/viewdata" method = "get">
 		<input type = "submit" value = "View Data">
 	</form>
-	<form action = "http://127.0.0.1:8080/logout" mehtod = "get">
+	<form action = "http://127.0.0.1:8080/logout" method = "get">
 		<input type = "submit" value = "Logout">
 	</form>
   </body>

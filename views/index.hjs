@@ -8,10 +8,13 @@
 	<form action = "http://127.0.0.1:8080/login" method = "POST">
 		User Name: <input tpye = "text" name = "username" > <br>
 		Password: <input tpye = "password" name = "pwd"> <br>
-		<input type = "submit", value = "Login">
+		<input type = "submit", value = "Sign In">
 
 	</form>
-  </body> 
+	<form action = "http://127.0.0.1:8080/signup" method = "GET">
+		<input type = "submit", value = "Sign Up">
+	</form>
+  </body>
   <script>
 	function checkCookie(){
 		var user = document.cookie;
