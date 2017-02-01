@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title {{ title }}
+    |     
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  |   
+  body
+    form(action='http://127.0.0.1:8080/signup', method='POST')
+
+      | User Name: 
+      input(tpye='text', name='username')
+      |  
+      br
+      | &#x9;&#x9;Password: 
+      input(tpye='password', name='pwd')
+      |  
+      br
+      | &#x9;&#x9;
+      input(type='submit', ,='', value='Sign Up')
+
+

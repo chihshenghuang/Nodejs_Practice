@@ -6,8 +6,9 @@ var isLoginError = false;
 
 /* GET home page. */
 router.get('/', function(req, res, next){
-		res.render('index', {title: 'welcome'});
+	res.render('index', {title: 'welcome'});
 });
+
 
 // User login success
 router.get('/success', function(req, res, next) {

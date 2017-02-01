@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title {{ title }}
+    |     
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  |   
+  body
+    p  Success
+    | &#x9;
+    form(action='http://127.0.0.1:8080/users/viewdata', method='get')
+      input(type='submit', value='View Data')
+    | &#x9;
+    form(action='http://127.0.0.1:8080/logout', method='get')
+      input(type='submit', value='Logout')

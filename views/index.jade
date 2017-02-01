@@ -1,5 +1,35 @@
-extends layout
+doctype html
+html
+  head
+    title '#{title}'
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  h1 {{title}}
+  body
+    form(action='http://127.0.0.1:8080/login', method='POST')
+      | User Name: 
+      input(tpye='text', name='username')
+      br
+      |                 Password: 
+      input(tpye='password', name='pwd')
+      br
+      input(type='submit', ,='', value='Sign In')
+    form(action='http://127.0.0.1:8080/signup', method='GET')
+      input(type='submit', ,='', value='Sign Up')
+  script.
+    function checkCookie(){
+    var user = document.cookie;
+    var isLoginError = '#{locals.isLoginError}';
+    console.log("statis");
+    if(!isLoginError){
+    	if(user != ""){
+    		alert("Welcome again " + user);
+    	}else{
+    		user = alert("Welcome");
+    	}
+    }else{	
+    	alert("Wrong username or password");
+    }
+    }
+  body(onload='checkCookie()')
 
-block content
-  h1= title
-  p Welcome to #{title}
+

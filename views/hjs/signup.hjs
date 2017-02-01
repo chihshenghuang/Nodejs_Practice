@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+	<form action = "http://127.0.0.1:8080/signup" method = "POST">
+		User Name: <input tpye = "text" name = "username" > <br>
+		Password: <input tpye = "password" name = "pwd"> <br>
+		<input type = "submit", value = "Sign Up">
+	</form>
+  </body>
+</html>
