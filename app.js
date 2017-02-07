@@ -13,7 +13,7 @@ var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
 	password: "zzzz78910",
-	database: "user"
+	database: "users"
 });
 
 con.connect(function(err){

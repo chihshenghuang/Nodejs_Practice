@@ -14,7 +14,7 @@ router.get('/', function(req, res, next){
 router.get('/success', function(req, res, next) {
 	isLoginError = true;
 	if(req.cookies.user !== null){
-		console.log(req.user);
+		console.log(req.cookies.user);
 		res.render('users', req);
 	}
 });
@@ -38,10 +38,13 @@ router.post('/signup', function(req, res, next){
 	var db = req.con;
 	var sql = {
 		account: req.body.username,
-		password: req.body.pwd
+		password: req.body.pwd,
+		email: req.body.email,
+		create_time: new Date(),
+		update_time: new Date()
 	};
 
-	var query = db.query('INSERT INTO user SET ?', sql, function(err,rows){
+	var query = db.query('INSERT INTO users SET ?', sql, function(err,rows){
 		if(err){
 			console.log(err);
 		}
@@ -57,7 +60,7 @@ router.post('/login', function(req, res, next){
 	var username_verify = false,
 	    password_verify = false;
 
-	db.query('SELECT * FROM user', function(err, rows){
+	db.query('SELECT * FROM users', function(err, rows){
 		if(err){
 			console.log(err);
 		}
@@ -78,7 +81,6 @@ router.post('/login', function(req, res, next){
 			
 		})
 	
-		console.log(username_verify, password_verify);
 		if((username_verify == true) && (password_verify == true)){
 			//Set cookie
 			username_verify = false;

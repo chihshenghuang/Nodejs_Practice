@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title {{ title }}
+    title #{ title }
     |     
     link(rel='stylesheet', href='/stylesheets/style.css')
   |   
@@ -15,6 +15,9 @@ html
       | &#x9;&#x9;Password: 
       input(tpye='password', name='pwd')
       |  
+      br
+      | &#x9;&#x9;Email:
+      input(tpye='text', name='email')
       br
       | &#x9;&#x9;
       input(type='submit', ,='', value='Sign Up')
