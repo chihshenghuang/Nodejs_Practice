@@ -1,9 +1,9 @@
 doctype html
 html
   head
-    title '#{title}'
+    title #{title}
     link(rel='stylesheet', href='/stylesheets/style.css')
-  h1 {{title}}
+  h1 #{title}
   body
     form(action='http://127.0.0.1:8080/login', method='POST')
       | User Name: 
@@ -19,12 +19,12 @@ html
     function checkCookie(){
     var user = document.cookie;
     var isLoginError = '#{locals.isLoginError}';
-    console.log("statis");
+    console.log('Status', isLoginError);
     if(!isLoginError){
     	if(user != ""){
     		alert("Welcome again " + user);
     	}else{
-    		user = alert("Welcome");
+    		alert("Welcome");
     	}
     }else{	
     	alert("Wrong username or password");

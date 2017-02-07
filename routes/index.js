@@ -6,7 +6,7 @@ var isLoginError = false;
 
 /* GET home page. */
 router.get('/', function(req, res, next){
-	res.render('index', {title: 'welcome'});
+	res.render('index', {title: 'Welcome'});
 });
 
 
@@ -25,7 +25,7 @@ router.get('/error', function(req, res, next){
 		console.log("error error");
 		isLoginError = true;
 		req.error = null;
-		res.render('index', {title: 'Wrong', isLoginError: isLoginError});
+		res.render('index', {title: 'Wrong, please try again!', isLoginError: isLoginError});
 	}
 });
 
@@ -70,11 +70,12 @@ router.post('/login', function(req, res, next){
 					username_verify = true;
 					console.log(itemvalue, username_verify);
 				}
-				if((itemkey == 'password') && (itemvalue == password) && username_verify == true){
+				if((itemkey == 'password') && (itemvalue == password) && username_verify == true && (rows[objectid].account == username)){
 					password_verify = true;
 					console.log(itemvalue, password_verify);
 				}
-			})
+			})	
+			
 		})
 	
 		console.log(username_verify, password_verify);
@@ -97,7 +98,7 @@ router.post('/login', function(req, res, next){
 router.get('/logout', function(req, res, next){
 	console.log('logout');
 	//res.clearCookie('user');
-	res.render('index', {title: 'welocme'});
+	res.render('index', {title: 'Welcome!'});
 });
 
 module.exports = router;
