@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
-
 var isLoginError = false;
+var crypto = require('crypto');
+
 
 
 /* GET home page. */
@@ -29,19 +30,21 @@ router.get('/error', function(req, res, next){
 	}
 });
 
-
 router.get('/signup', function(req, res, next){
 	res.render('signup', req);
 });
 
 router.post('/signup', function(req, res, next){
 	var db = req.con;
+	var hashPassword = saltHashPassword(req.body.pwd);
+	
 	var sql = {
 		account: req.body.username,
-		password: req.body.pwd,
+		usersalt: hashPassword.salt,
+		password: hashPassword.passwordHash,
 		email: req.body.email,
-		create_time: new Date(),
-		update_time: new Date()
+		create_time: new Date,
+		update_time: new Date
 	};
 
 	var query = db.query('INSERT INTO users SET ?', sql, function(err,rows){
@@ -59,6 +62,7 @@ router.post('/login', function(req, res, next){
 	var password = req.body.pwd;
 	var username_verify = false,
 	    password_verify = false;
+	var usersalt;
 
 	db.query('SELECT * FROM users', function(err, rows){
 		if(err){
@@ -70,10 +74,11 @@ router.post('/login', function(req, res, next){
 			items.forEach(function(itemkey){
 				var itemvalue = rows[objectid][itemkey];
 				if((itemkey == 'account') && (itemvalue == username)){
+					usersalt = rows[objectid].usersalt;
 					username_verify = true;
 					console.log(itemvalue, username_verify);
 				}
-				if((itemkey == 'password') && (itemvalue == password) && username_verify == true && (rows[objectid].account == username)){
+				if((itemkey == 'password') && username_verify == true && (sha512(password, usersalt).passwordHash == itemvalue)){
 					password_verify = true;
 					console.log(itemvalue, password_verify);
 				}
@@ -83,6 +88,7 @@ router.post('/login', function(req, res, next){
 	
 		if((username_verify == true) && (password_verify == true)){
 			//Set cookie
+			console.log("set cookie");
 			username_verify = false;
 			password_verify = false;
 			res.cookie("user", username, {maxAge:60000, httpOnly:false});
@@ -102,5 +108,43 @@ router.get('/logout', function(req, res, next){
 	//res.clearCookie('user');
 	res.render('index', {title: 'Welcome!'});
 });
+
+/**
+ * generates random string of characters i.e salt
+ * @function
+ * @param {number} length - Length of the random string.
+ */
+
+var genRandomString = function(length){
+	return crypto.randomBytes(Math.ceil(length/2))
+		.toString('hex')    /** convert to hexadecimal format */
+		.slice(0, length);  /** return required number of characters */
+};
+
+/**
+ * hash password with sha512.
+ * @function
+ * @param {string} password - List of required fields.
+ * @param {string} salt - Data to be validated.
+ */
+
+var sha512 = function(password, salt){
+	var hash = crypto.createHmac('sha512', salt);    /** Hashing algorithm sha512 */
+	hash.update(password);
+	var value = hash.digest('hex');
+	return{
+		salt:salt,
+		passwordHash:value
+	};
+};
+
+function saltHashPassword(userpassword){
+	var salt = genRandomString(16);
+	var passwordData = sha512(userpassword, salt);
+	console.log('User Password = ' + userpassword);
+	console.log('PasswordHash = '+ passwordData.passwordHash);
+	console.log('\nsalt = ' + passwordData.salt);
+	return passwordData;
+}
 
 module.exports = router;
