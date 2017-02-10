@@ -3,7 +3,9 @@ html
   head
     title #{title}
     link(rel='stylesheet', href='/stylesheets/style.css')
+  
   script(src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+  script(src = 'checkCookie.js')
   h1 #{title}
   script.
     $(document).ready(function(){
@@ -25,21 +27,6 @@ html
       input(type='submit', ,='', value='Sign In')
     form(action='http://127.0.0.1:8080/signup', method='GET')
       input(type='submit', ,='', value='Sign Up')
-  script.
-    function checkCookie(){
-    var user = document.cookie;
-    var isLoginError = '#{locals.isLoginError}';
-    console.log('Status', isLoginError);
-    if(!isLoginError){
-    	if(user != ""){
-    		alert("Welcome again " + user);
-    	}else{
-    		alert("Welcome");
-    	}
-    }else{	
-    	alert("Wrong username or password");
-    }
-    }
-  body(onload='checkCookie()')
+  body(onload='checkCookie(#{locals.isLoginError})')
 
 
