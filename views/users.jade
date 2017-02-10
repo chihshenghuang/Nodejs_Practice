@@ -4,12 +4,14 @@ html
     title #{ title }
     |     
     link(rel='stylesheet', href='/stylesheets/style.css')
-  |   
-  body
-    p  Success
-    | &#x9;
+    script(src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+  boidy
     form(action='http://127.0.0.1:8080/users/viewdata', method='get')
       input(type='submit', value='View Data')
-    | &#x9;
     form(action='http://127.0.0.1:8080/logout', method='get')
       input(type='submit', value='Logout')
+    
+    p User account: #{account}
+    p User email: #{email}
+    p User create time: #{create_time}
+    p User update time: #{update_time} 
