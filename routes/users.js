@@ -15,8 +15,6 @@ router.get('/viewdata', function(req, res, next){
 					create_time: rows[0].create_time,
 					update_time: rows[0].update_time})
         });
-
-	
 });
 
 module.exports = router;

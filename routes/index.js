@@ -101,6 +101,7 @@ router.post('/login', function(req, res, next){
 			res.redirect('error');
 		}
 	});
+	
 });
 
 router.get('/logout', function(req, res, next){
