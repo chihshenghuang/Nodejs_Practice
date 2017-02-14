@@ -4,4 +4,4 @@ usersalt VARCHAR(16),
 password VARCHAR(128),
 email VARCHAR(50),
 create_time datetime,
-update_time datetim);
+update_time datetime);
