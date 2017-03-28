@@ -10,18 +10,18 @@ var users = require('./routes/users');
 var mysql = require("mysql");
 
 var con = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: "zzzz78910",
-	database: "users"
+  host: "localhost",
+  user: "root",
+  password: "zzzz78910",
+  database: "users"
 });
 
 con.connect(function(err){
-	if(err){
-		console.log('connecting error');
-		return;	
-	}	
-	console.log('connecting success');
+  if(err){
+    console.log('connecting error');
+    return;	
+  }	
+  console.log('connecting success');
 });
 
 
@@ -29,7 +29,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -43,8 +43,8 @@ app.use(express.static(path.join(__dirname, 'public/javascript')));
 
 // db state
 app.use(function(req, res, next){
-	req.con = con;
-	next();	
+  req.con = con;
+  next();	
 });
 
 app.use('/', index);
