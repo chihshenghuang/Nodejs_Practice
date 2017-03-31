@@ -13,44 +13,7 @@ $(document).ready(function(){
   var page_navigation = $('#page_navigation');
   var searchInput = $('#searchInput');
   render();
-	
-  // Must bind with document to avoid the new '.page_link' can't have click event
-  $(document).on('click', '.page_link', function(event){
-    event.preventDefault(); //Cancel the default action when the method is called
-    $('.active').removeClass('active');
-    $(this).addClass('active');
-    var IndexData = $(this).data();
-    rowDisplay(IndexData.start, IndexData.end);	
-  });
-	
-  // Previous, Next function
-  $(document).on('click', '.previous_link, .next_link', function(event){
-    event.preventDefault();
-    var traverse = $(this).is('.previous_link') ? 'prev' : 'next';
-    //Call the ('.page_link').click(function(e)) atfer decide the traverse value
-    $('.page_link.active')[traverse]('.page_link').click(); 
-  });
-
-  // First, Last Function
-  $(document).on('click', '.first_link, .last_link', function(event){
-    event.preventDefault();
-		
-    if($(this).is('.first_link')){
-      rowDisplay(0, show_per_page);
-      $('.page_link').removeClass('active').first().addClass('active');
-    }
-    else{
-      // Tow conditions to avoid the wrong boundary condtion in last_link 
-      if(number_of_items % show_per_page){
-        rowDisplay(number_of_items - (number_of_items % show_per_page), number_of_items);
-      }
-      else{
-        rowDisplay(number_of_items - show_per_page, number_of_items);
-      }
-      $('.page_link').removeClass('active').last().addClass('active');
-    }
-  });
-
+  
   // Search Function
   searchSubmit.click(function(event){
     var page = searchInput.val();
@@ -118,3 +81,40 @@ $(document).ready(function(){
 });
 
 
+
+$('.page_link').click(function(event){
+  event.preventDefault(); //Cancel the default action when the method is called
+  $('.active').removeClass('active');
+  $(this).addClass('active');
+  var IndexData = $(this).data();
+  rowDisplay(IndexData.start, IndexData.end);	
+});
+
+// Previous, Next function
+$('.previous_link, .next_link').click(function(event){
+  event.preventDefault();
+  var traverse = $(this).is('.previous_link') ? 'prev' : 'next';
+  //Call the ('.page_link').click(function(e)) atfer decide the traverse value
+  $('.page_link.active')[traverse]('.page_link').click(); 
+});
+
+
+// First, Last Function
+$(document).on('click', '.first_link, .last_link', function(event){
+  event.preventDefault();
+		
+  if($(this).is('.first_link')){
+    rowDisplay(0, show_per_page);
+    $('.page_link').removeClass('active').first().addClass('active');
+  }
+  else{
+    // Tow conditions to avoid the wrong boundary condtion in last_link 
+    if(number_of_items % show_per_page){
+      rowDisplay(number_of_items - (number_of_items % show_per_page), number_of_items);
+    }
+    else{
+      rowDisplay(number_of_items - show_per_page, number_of_items);
+    }
+    $('.page_link').removeClass('active').last().addClass('active');
+  }
+});
