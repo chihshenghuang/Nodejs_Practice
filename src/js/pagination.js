@@ -15,8 +15,8 @@ $(document).ready(function(){
   render();
 	
   // Must bind with document to avoid the new '.page_link' can't have click event
-  $(document).on('click', '.page_link', function(e){
-    e.preventDefault(); //Cancel the default action when the method is called
+  $(document).on('click', '.page_link', function(event){
+    event.preventDefault(); //Cancel the default action when the method is called
     $('.active').removeClass('active');
     $(this).addClass('active');
     var IndexData = $(this).data();
@@ -24,16 +24,16 @@ $(document).ready(function(){
   });
 	
   // Previous, Next function
-  $(document).on('click', '.previous_link, .next_link', function(e){
-    e.preventDefault();
+  $(document).on('click', '.previous_link, .next_link', function(event){
+    event.preventDefault();
     var traverse = $(this).is('.previous_link') ? 'prev' : 'next';
     //Call the ('.page_link').click(function(e)) atfer decide the traverse value
     $('.page_link.active')[traverse]('.page_link').click(); 
   });
 
   // First, Last Function
-  $(document).on('click', '.first_link, .last_link', function(e){
-    e.preventDefault();
+  $(document).on('click', '.first_link, .last_link', function(event){
+    event.preventDefault();
 		
     if($(this).is('.first_link')){
       rowDisplay(0, show_per_page);
@@ -52,7 +52,7 @@ $(document).ready(function(){
   });
 
   // Search Function
-  searchSubmit.click(function(e){
+  searchSubmit.click(function(event){
     var page = searchInput.val();
     var data = page * show_per_page;
 
@@ -68,15 +68,15 @@ $(document).ready(function(){
   });
 
   // Show per page function
-  pagePerShow.change(function(e){
-    e.preventDefault();
+  pagePerShow.change(function(event){
+    event.preventDefault();
     // The value get from the jQuery is not int, so use the parseInt to convert
     show_per_page = parseInt($('#page_per_show option:selected').val());
     render();
   });
 
   // Input mock data function
-  itemsNumInput.click(function(e){
+  itemsNumInput.click(function(event){
     number_of_items = itemsNum.val();
     render();
     $('.page_link').first().addClass('active');
