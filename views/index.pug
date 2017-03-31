@@ -2,11 +2,11 @@ doctype html
 html
   head
     title #{title}
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='stylesheet', href='/stylesheets/pagination.css')
+    link(rel='stylesheet', href='/css/style.min.css')
+    link(rel='stylesheet', href='/css/pagination.min.css')
     script(src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
-    script(src = 'checkCookie.js')
-    script(src = 'pagination.js')
+    script(src = '/js/checkCookie.min.js')
+    script(src = '/js/pagination.min.js')
   
   h1 #{title}
   script.
@@ -23,7 +23,7 @@ html
       | User Name: 
       input(type='text', name='username')
       br
-      |                 Password: 
+      | Password: 
       input(type='password', name='pwd')
       br
       input(type='submit', value='Sign In')
