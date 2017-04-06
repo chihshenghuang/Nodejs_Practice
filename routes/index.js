@@ -2,7 +2,10 @@ var express = require('express');
 var router = express.Router();
 var isLoginError = false;
 var crypto = require('crypto');
+var multer = require('multer');
+var upload = multer({dest:'uploads/'});
 
+const fs = require('fs');
 /* GET home page. */
 router.get('/', function(req, res, next){
   res.render('index', {title: 'Welcome'});
@@ -113,6 +116,39 @@ router.get('/pagination', function(req, res, next){
   console.log('pagination');
   res.render('pagination');
 });
+
+/* File download */
+router.get('/:file', function(req, res, next){
+  var file = req.params.file;
+  path = __dirname + "/../files/" + file;
+  console.log(path);
+  res.download(path, function(err){
+    if (err)
+      res.status(404).send("Sorry, we can't find it!");    
+  });
+});
+
+/* File upload */
+router.post('/upload', upload.single('uploadFile'), function(req, res, next){
+  var newPath = __dirname + "/../uploads/" + req.file.filename;
+  var renamePath =  __dirname + "/../uploads/" + req.file.originalname;
+  fs.readFile(req.file.path, function(err, data){
+    if(err)
+      throw err;
+    fs.writeFile(newPath, data, function(err){
+      if(err)
+        throw err;
+    });
+    fs.rename(newPath, renamePath, function(err){
+      if(err)
+        throw err;
+      res.redirect('back');
+    });
+  });
+});
+
+
+
 
 
 

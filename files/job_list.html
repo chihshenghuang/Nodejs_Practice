@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<body onload='getInnovaJobList()'>
+	<div id="container"/>
+	<script type='text/javascript'>
+		function getInnovaJobList(){
+			var url = 'http://www.104.com.tw/i/apis/jobsearch.cfm?c=5e3e466f383a426b34363e673c423a1d02d2d2d714570462644j01&fmt=8';
+			$.ajax({
+				url: url,
+				dataType: 'json',
+				type: 'GET',
+				success: function(json){
+					var jobNumber = Object.keys(json.data).length;
+					var container = document.getElementById("container");
+					while(container.hasChildNodes()){
+						container.removeChild(container.lastChild);
+					}	
+					for(var i = 0; i < jobNumber; i++){
+						// Chagne the data type from json to DOM
+						var jobData = json.data[i].JOB;
+						var DOM_jobData = document.createTextNode(jobData);
+						var text = document.createElement("text");
+						container.appendChild(text.appendChild(DOM_jobData));
+						container.appendChild(document.createElement("br"));
+						console.log(json.data[i].JOB);
+					}
+				}
+			});
+		}
+	</script>
+</body>
+</html>

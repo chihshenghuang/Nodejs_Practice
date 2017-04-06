@@ -33,5 +33,20 @@ html
       input(type='submit', value='Pagination Example')
   body(onload='checkCookie(#{locals.isLoginError})')
 
-  
+  block content
 
+  body
+    li 
+      | Download 
+      a(href="/amazing.txt", onclick='form.submit()') amazing.txt
+    li 
+      | Download 
+      a(href="/job_list.html", onclick='form.submit()') job_list.html
+    li
+      | Download 
+      a(href="/Redmine_Step4.jpg", onclick='form.submit()') Redmine_Step4.jpg
+    li
+      | Upload
+      form(action="http://127.0.0.1:8080/upload", method="post", enctype="multipart/form-data")
+        input(type='file', name='uploadFile')
+        input(type='submit', value='Upload')
